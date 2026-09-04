@@ -155,6 +155,8 @@ only if you intend to undo all shell changes made since that snapshot.
 
 ## Attribution
 
+T480 Batteries contributions copyright (c) 2026 Stacking Turtles Ltd.
+
 `Panel.qml`, `BatteryCard.qml`, and `Model.js` adapt Omarchy's Power panel and
 its MIT-licensed visuals/profile handling. Battery telemetry and two-pack layout
 are implemented here. See `LICENSE`. No low-battery notification service is forked.
