@@ -1,0 +1,10 @@
+[Unit]
+Description=Restore T480 battery charge limits
+After=systemd-modules-load.service
+ConditionPathExists=/var/lib/t480batteries/mode.json
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/t480batteries/charge_limit.py restore
+TimeoutStartSec=20
+UMask=0022

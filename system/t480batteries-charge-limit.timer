@@ -1,0 +1,10 @@
+[Unit]
+Description=Reapply T480 charge limits after boot, resume or battery insertion
+
+[Timer]
+OnBootSec=10s
+OnUnitInactiveSec=30s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target
