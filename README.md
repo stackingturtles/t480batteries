@@ -23,7 +23,10 @@ Omarchy desktop session. Monitoring needs no additional Python packages or root 
 The optional lifespan saver requires installing the privileged helper below.
 
 ```sh
-omarchy plugin add https://github.com/stackingturtles/t480batteries.git --enable
+omarchy plugin add https://github.com/stackingturtles/t480batteries.git
+git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries checkout --detach v1.0.0
+omarchy plugin validate ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries
+omarchy plugin enable io.github.stackingturtles.t480batteries
 ```
 
 This replaces the stock Power widget using Omarchy's `clonedFrom` mechanism.
@@ -154,12 +157,22 @@ stock panel and removes only the development link. Backups are under
 
 ## Releases and migration
 
-The manifest currently declares version **0.2.0**. Release tags are published
-only after review; `main` remains the development branch. When choosing a
-published release, add the plugin without `--enable`, check out that tag with
-`git checkout --detach <tag>` inside its installation directory, validate it,
-then enable it. Omarchy's updater fetches the default branch even from detached
-checkouts; select release tags manually to remain on a release.
+The current release is [v1.0.0](https://github.com/stackingturtles/t480batteries/releases/tag/v1.0.0).
+`main` remains the development branch. Omarchy's updater fetches the default
+branch even from detached checkouts; do not use `omarchy plugin update` on this
+plugin (including an update of all plugins) if you want to stay on a release.
+
+For an existing Git installation, close the panel and select the release:
+
+```sh
+omarchy plugin disable io.github.stackingturtles.t480batteries
+git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries fetch origin --tags
+git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries checkout --detach v1.0.0
+omarchy plugin validate ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries
+omarchy plugin enable io.github.stackingturtles.t480batteries
+```
+
+For future updates, read the release notes and substitute the chosen tag.
 
 Changing the plugin checkout does not update the root-owned charge helper.
 Re-run `install-saver.sh` from the selected version when upgrading charge control.
