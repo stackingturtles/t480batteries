@@ -163,8 +163,7 @@ checkouts; select release tags manually to remain on a release.
 
 Changing the plugin checkout does not update the root-owned charge helper.
 Re-run `install-saver.sh` from the selected version when upgrading charge control.
-See [migration from the original namespace](docs/migration.md) for existing
-installations. Do not install both namespace versions together.
+Do not install both namespace versions together.
 
 ## Contribute
 
