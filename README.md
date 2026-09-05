@@ -14,25 +14,22 @@ The bar icon and header use **combined charge weighted by full energy capacity**
 They never average the two percentages: a 24 Wh pack and a 72 Wh pack contribute
 different amounts of usable energy. Both pack percentages appear in the popup.
 
-![Two independent battery readings on tank](docs/panel.png)
+![Internal and external ThinkPad T480 battery readings](docs/panel.png)
 
-## Install locally
+## Install
 
 Requirements: Omarchy 4.0.2's Quickshell plugin API, Python 3, and an active
 Omarchy desktop session. Monitoring needs no additional Python packages or root access.
 The optional lifespan saver requires installing the privileged helper below.
 
 ```sh
-cd ~/code/t480batteries
-python3 install.py
+omarchy plugin add https://github.com/stackingturtles/t480batteries.git --enable
 ```
 
-The installer backs up `shell.json`, links this checkout at
-`~/.config/omarchy/plugins/io.github.ijonas.t480batteries`, and replaces the stock
-Power widget using Omarchy's `clonedFrom` mechanism. It leaves the stock
-`omarchy.battery` low-charge warning/power-profile service enabled.
-It can be rerun safely. Edit this project directly; Omarchy hot-reloads the
-plugin. The packaged Omarchy source is never changed.
+This replaces the stock Power widget using Omarchy's `clonedFrom` mechanism.
+Keep the stock `omarchy.battery` service enabled for low-charge warnings.
+
+## Use
 
 Click the bar's battery icon, or run:
 
@@ -50,7 +47,7 @@ and Tab moves between panels. Scroll the panel if screen space is limited.
 Install charge control once (a graphical administrator prompt appears):
 
 ```sh
-pkexec ./install-saver.sh
+pkexec ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries/install-saver.sh
 ```
 
 Open the battery panel and toggle **Battery lifespan saver**:
@@ -82,7 +79,7 @@ sudo systemctl disable --now t480batteries-charge-limit.timer
 sudo systemctl stop t480batteries-charge-limit.service
 sudo /usr/local/libexec/t480batteries/charge_limit.py disable
 sudo rm -f /etc/systemd/system/t480batteries-charge-limit.{service,timer}
-sudo rm -f /usr/share/polkit-1/actions/io.github.ijonas.t480batteries.policy
+sudo rm -f /usr/share/polkit-1/actions/io.github.stackingturtles.t480batteries.policy
 sudo rm -f /usr/local/libexec/t480batteries/charge_limit.py
 sudo rm -f /var/lib/t480batteries/{mode.json,control.lock,mode.tmp}
 sudo systemctl daemon-reload
@@ -134,26 +131,47 @@ charging, invalid telemetry, and current/charge fallbacks. They do not modify
 real batteries or switch power profiles. `batteries.py --root /path/to/fixtures`
 is also available for offline diagnosis.
 
-## Fleet and recovery
+## Remove
 
-On `tank`, a local host-only override in
-`~/omarchy-fleet/hosts/tank/config/.config/omarchy/shell.json` selects this widget.
-It preserves the ProtonVPN role's layout and changes only the power widget id.
-The plugin itself is installed from this local project; Fleet cannot fetch it
-on a new host until a remote repository is published and declared. Future shared
-bar changes should also be reviewed against this full-file host override.
+Remove charge control first using the commands above if it is installed, then:
 
 ```sh
-python3 install.py --uninstall
+omarchy plugin remove io.github.stackingturtles.t480batteries
+omarchy plugin enable omarchy.power
 ```
 
-This restores the stock Power widget and removes only the development symlink,
-keeping the project. If using the tank Fleet override, change its widget id back
-to `omarchy.power` (or remove the override after reviewing other host edits).
-Shell backups are in `~/.local/state/t480batteries/`. Restore a whole backup
-only if you intend to undo all shell changes made since that snapshot.
+If a configuration manager selects this widget, restore its widget ID to
+`omarchy.power` too. Removing the panel alone leaves charge control installed.
 
-## Attribution
+## Develop
+
+Clone the repository and run the validation commands above. For live development,
+`python3 install.py` links your checkout into the plugin directory and backs up
+shell configuration. It refuses to overwrite an existing Git installation;
+remove that installation first. `python3 install.py --uninstall` restores the
+stock panel and removes only the development link. Backups are under
+`~/.local/state/t480batteries/backups/`.
+
+## Releases and migration
+
+The manifest currently declares version **0.2.0**. Release tags are published
+only after review; `main` remains the development branch. When choosing a
+published release, add the plugin without `--enable`, check out that tag with
+`git checkout --detach <tag>` inside its installation directory, validate it,
+then enable it. Omarchy's updater fetches the default branch even from detached
+checkouts; select release tags manually to remain on a release.
+
+Changing the plugin checkout does not update the root-owned charge helper.
+Re-run `install-saver.sh` from the selected version when upgrading charge control.
+See [migration from the original namespace](docs/migration.md) for existing
+installations. Do not install both namespace versions together.
+
+## Contribute
+
+Contributions are welcome via pull requests. Include relevant automated tests
+and describe any physical battery checks. Do not include device serial numbers.
+
+## License and attribution
 
 T480 Batteries contributions copyright (c) 2026 Stacking Turtles Ltd.
 

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "io.github.ijonas.t480batteries",
+  "id": "io.github.stackingturtles.t480batteries",
   "name": "T480 Batteries",
   "version": "0.2.0",
-  "author": "ijonas",
+  "author": "Stacking Turtles Ltd.",
   "description": "Internal and external ThinkPad T480 batteries with Omarchy power profiles",
   "kinds": [
     "bar-widget"
@@ -20,5 +20,6 @@
   },
   "omarchy": {
     "clonedFrom": "omarchy.power"
-  }
+  },
+  "license": "MIT"
 }
