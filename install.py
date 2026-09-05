@@ -9,7 +9,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-PLUGIN_ID = "io.github.ijonas.t480batteries"
+PLUGIN_ID = "io.github.stackingturtles.t480batteries"
 
 
 def run(*args):
@@ -49,7 +49,7 @@ def main():
         target.unlink()
         run("omarchy-shell", "shell", "rescanPlugins")
         print("Restored Omarchy Power. Keep or remove this project separately.")
-        print("If Fleet has a tank override, restore its power widget id too.")
+        print("If a configuration manager selects this widget, restore its power widget id too.")
         return
 
     target.parent.mkdir(parents=True, exist_ok=True)

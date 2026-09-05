@@ -3,7 +3,7 @@
 This is an Omarchy user plugin, not a Codex plugin. Read the Omarchy skill for
 desktop work. Never edit `/usr/share/omarchy/`.
 
-- Plugin id: `io.github.ijonas.t480batteries`; `clonedFrom: omarchy.power`
+- Plugin id: `io.github.stackingturtles.t480batteries`; `clonedFrom: omarchy.power`
   preserves the stock panel IPC. Keep `omarchy.battery` enabled for warnings.
 - BAT0 is internal and BAT1 external on this T480. Do not mix their cycles,
   thresholds, current or time estimates. Combined charge must be energy weighted.

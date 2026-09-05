@@ -2,7 +2,7 @@
 <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
   <vendor>T480 Batteries</vendor>
-  <action id="io.github.ijonas.t480batteries.charge-limit">
+  <action id="io.github.stackingturtles.t480batteries.charge-limit">
     <description>Change T480 battery charge limits</description>
     <message>Authenticate to set both T480 batteries to an 80% or 100% charge limit</message>
     <defaults><allow_any>no</allow_any><allow_inactive>no</allow_inactive><allow_active>auth_admin_keep</allow_active></defaults>
