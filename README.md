@@ -24,7 +24,7 @@ The optional lifespan saver requires installing the privileged helper below.
 
 ```sh
 omarchy plugin add https://github.com/stackingturtles/t480batteries.git
-git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries checkout --detach v1.0.0
+git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries checkout --detach v1.0.1
 omarchy plugin validate ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries
 omarchy plugin enable io.github.stackingturtles.t480batteries
 ```
@@ -148,6 +148,9 @@ If a configuration manager selects this widget, restore its widget ID to
 
 ## Develop
 
+Contributor-only `AGENTS.md` files are kept local and ignored by Git; they are
+not included in the installed plugin tree or release source archives.
+
 Clone the repository and run the validation commands above. For live development,
 `python3 install.py` links your checkout into the plugin directory and backs up
 shell configuration. It refuses to overwrite an existing Git installation;
@@ -157,7 +160,7 @@ stock panel and removes only the development link. Backups are under
 
 ## Releases and migration
 
-The current release is [v1.0.0](https://github.com/stackingturtles/t480batteries/releases/tag/v1.0.0).
+The current release is [v1.0.1](https://github.com/stackingturtles/t480batteries/releases/tag/v1.0.1).
 `main` remains the development branch. Omarchy's updater fetches the default
 branch even from detached checkouts; do not use `omarchy plugin update` on this
 plugin (including an update of all plugins) if you want to stay on a release.
@@ -167,7 +170,7 @@ For an existing Git installation, close the panel and select the release:
 ```sh
 omarchy plugin disable io.github.stackingturtles.t480batteries
 git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries fetch origin --tags
-git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries checkout --detach v1.0.0
+git -C ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries checkout --detach v1.0.1
 omarchy plugin validate ~/.config/omarchy/plugins/io.github.stackingturtles.t480batteries
 omarchy plugin enable io.github.stackingturtles.t480batteries
 ```

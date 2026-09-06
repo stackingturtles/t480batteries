@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.stackingturtles.t480batteries",
   "name": "T480 Batteries",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Stacking Turtles Ltd.",
   "description": "Internal and external ThinkPad T480 batteries with Omarchy power profiles",
   "kinds": [
